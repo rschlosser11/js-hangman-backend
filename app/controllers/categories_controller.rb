@@ -17,6 +17,8 @@ class CategoriesController < ApplicationController
     end
 
     def create
-
+        category = Category.create(name: params[:name])
+        Word.create(word: params[:word], category: category)
+        render json: category, except: [:created_at, :updated_at]
     end
 end 
