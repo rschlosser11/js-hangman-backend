@@ -9,6 +9,7 @@ class WordsController < ApplicationController
     end
 
     def create
-
+        word = Word.create(word: params[:word], category_id: params[:category_id])
+        render json: word, except: [:created_at, :updated_at]
     end
 end
