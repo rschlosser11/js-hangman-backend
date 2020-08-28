@@ -12,13 +12,13 @@ class CategoriesController < ApplicationController
     end
 
     def show
-        category = Category.find(params[:id])
+        category = Category.find_or_create_by(params[:id])
         render json: category, except: [:created_at, :updated_at]
     end
 
     def create
-        category = Category.create(name: params[:name])
-        Word.create(word: params[:word], category: category)
+        category = Category.find_or_create_by(name: params[:name])
+        Word.find_or_create_by(word: params[:word], category: category)
         render json: category, except: [:created_at, :updated_at]
     end
 end 
